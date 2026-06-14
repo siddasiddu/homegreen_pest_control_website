@@ -138,3 +138,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+  // ---- Service page card reveal ----
+  const svcCards = document.querySelectorAll('.svc-card');
+  if (svcCards.length && 'IntersectionObserver' in window) {
+    const svcObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          svcObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    svcCards.forEach(el => svcObs.observe(el));
+  }
